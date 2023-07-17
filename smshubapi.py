@@ -51,7 +51,7 @@ class SmsHub:
             _data = "&".join([f"{key}={urllib.parse.quote(str(value))}" for key, value in data.items()])
             url_to_req = f"{URL}?{_data}"
             async with session.get(url=url_to_req) as response:
-                return (await response.text()).split(":")[1]
+                return float((await response.text()).split(":")[1])
     """Returning tuple (ID, NUMBER)"""
     async def getNumber(self, service: str, operator: str = None, country: int = None):
         async with aiohttp.ClientSession() as session:
